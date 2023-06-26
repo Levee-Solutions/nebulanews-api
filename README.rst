@@ -1,4 +1,4 @@
-:code:`Django REST`ful API to serve requests by the `NebulaNews frontend`_.
+`Django REST` ful API to serve requests by the `NebulaNews frontend`_.
 
 .. _NebulaNews frontend: https://github.com/Levee-Solutions/nebulanews-spa
 
@@ -9,14 +9,14 @@ Installation
 Environment variables
 ---------------------
 The `Django settings` module expects some environment variables to properly work. These are defined in `.env.example`, which you can copy and rename:
-.. code:: bash
+.. code-block:: bash
 
     cp .env.example .env
 
 Run the project
 ---------------
 You can run the project as a Docker container by running
-.. code::bash
+.. code-block::bash
 
     docker compose -f dev.yml up
 
