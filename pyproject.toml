@@ -10,6 +10,7 @@ packages = [{include = "nebulanews_api"}]
 python = "^3.9"
 django = "^4.2.2"
 django-rest-framework = "^0.1.0"
+psycopg2-binary = "^2.9.6"
 
 
 [build-system]
