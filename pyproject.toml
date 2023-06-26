@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "nebulanews-api"
+version = "0.1.0"
+description = ""
+authors = ["joseabautista <jose_antonio_bautista_recio@external.mckinsey.com>"]
+readme = "README.md"
+packages = [{include = "nebulanews_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.2.2"
+django-rest-framework = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
