@@ -11,7 +11,7 @@ class NewsSource(str, Enum):
 
 
 class NewsArticle(models.Model):
-    id = models.SlugField(blank=False)
+    id = models.SlugField(primary_key=True, blank=False)
     source = models.CharField(
         choices=[(NewsSource.mind, "Microsoft News Dataset")],
         default=NewsSource.mind,

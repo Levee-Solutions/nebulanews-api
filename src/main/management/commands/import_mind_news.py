@@ -10,12 +10,12 @@ logger = logging.getLogger("django")
 
 
 class Command(BaseCommand):
-    help = "Create news list from local files."
+    help = "Create news list from MIND TSV file."
 
     def add_arguments(self, parser):
         parser.add_argument(
             "--file",
-            help="File path containing the news.",
+            help="File path containing the TSV file.",
             required=True,
         )
 

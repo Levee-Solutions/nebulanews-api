@@ -2,4 +2,4 @@ from django.db import models
 
 
 class User(models.Model):
-    id = models.SlugField(blank=False)
+    id = models.SlugField(primary_key=True, blank=False)
