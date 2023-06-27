@@ -12,6 +12,7 @@ django = "^4.2.2"
 django-rest-framework = "^0.1.0"
 psycopg2-binary = "^2.9.6"
 pandas = "^2.0.2"
+tqdm = "^4.65.0"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
