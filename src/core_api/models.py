@@ -18,7 +18,7 @@ class NewsArticle(models.Model):
         blank=False,
     )
     category = models.CharField(max_length=20)
-    subcategory = models.CharField(max_length=30)
+    subcategory = models.CharField(max_length=40)
     title = models.TextField(blank=False)
     abstract = models.TextField()
     url = models.URLField(blank=False)

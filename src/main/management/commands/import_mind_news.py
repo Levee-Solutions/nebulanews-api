@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 from django.core.management import BaseCommand
+from tqdm import tqdm
 
 from core_api.models import NewsArticle, NewsSource
 
@@ -21,7 +22,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         file = Path(options["file"])
-        self.stdout.write(self.style.INFO(f"Reading file at {options['file']}"))
+        self.stdout.write(self.style.SUCCESS(f"Reading file at {options['file']}"))
         articles = pd.read_csv(
             file,
             sep="\t",
@@ -44,11 +45,19 @@ class Command(BaseCommand):
                 "url",
             ],
         )
-        for _, article in articles.iterrows():
-            model_article = NewsArticle(**article.to_dict(), source=NewsSource.mind)
-            model_article.save()
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f"Created article {article['id']}: {article['title']}"
+        for _, article in tqdm(articles.iterrows(), total=articles.shape[0]):
+            article_data = article.to_dict()
+            article_id = article_data.pop("id")
+            try:
+                _, _ = NewsArticle.objects.update_or_create(
+                    id=article_id,
+                    defaults=dict(**article.to_dict(), source=NewsSource.mind),
                 )
-            )
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(
+                        f"Could not create model for news article {article_id} of the form: {article_data}. Exception caught: {e}"
+                    )
+                )
+                pass
+        self.stdout.write(self.style.SUCCESS("Done!"))
