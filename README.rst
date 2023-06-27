@@ -20,4 +20,12 @@ You can run the project as a Docker container by running ::
 
 This will look for a local Docker image for the project, and create it if it doesn't exist. All packages present in ``requirements.txt`` will be installed in the virtual environment.
 
-We use Poetry to efficiently manage the dependencies of the project.
+Database
+--------
+To populate the Postgres database, you can download the `MIND dataset`_ files (we recommend the **MIND-small** version for testing).
+
+.. _Mind dataset: https://msnews.github.io/
+
+Once you have them, run the following commands to upload the articles and interactions: ::
+
+    $ docker compose -f dev.yml run --rm nebula-django python src/manage.py import_mind_news --file <path to news.tsv file>

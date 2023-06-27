@@ -54,10 +54,9 @@ class Command(BaseCommand):
                     defaults=dict(**article.to_dict(), source=NewsSource.mind),
                 )
             except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(
-                        f"Could not create model for news article {article_id} of the form: {article_data}. Exception caught: {e}"
-                    )
+                tqdm.write(
+                    f"Could not create model for news article {article_id} of the form: {article_data}. Exception caught: {e}"
                 )
+
                 pass
         self.stdout.write(self.style.SUCCESS("Done!"))
