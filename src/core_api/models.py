@@ -26,6 +26,7 @@ class NewsArticle(models.Model):
 
 
 class NewsImpression(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, blank=False, on_delete=models.CASCADE)
     article = models.ForeignKey(NewsArticle, blank=False, on_delete=models.CASCADE)
-    # TODO: define **type**: click, rating, thumbs up/down...
+    timestamp = models.DateTimeField(default=datetime.now, blank=False)
+    session = models.SlugField(blank=False, default="missing_session")
