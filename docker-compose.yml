@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  nebula-db:
+    image: postgres:14-alpine
+    ports:
+      - '5432:5432'
+
+    environment:
+      - POSTGRES_PASSWORD=nebulapi
+      - POSTGRES_USER=nebulapi
+      - POSTGRES_DB=nebulapi
+
+    volumes:
+      - ./nebulanews-api/dbdata:/var/lib/postgresql/data/
+
+  nebula-front:
+    build:
+      context: ./nebulanews-spa
+      dockerfile: Dockerfile
+
+    ports:
+      - '3000:5173'
+
+    volumes:
+      - ./nebulanews-spa/src:/app/src
+
+    depends_on:
+      - nebula-django
+
+  nebula-django:
+    build:
+      context: ./nebulanews-api
+      dockerfile: Dockerfile
+    env_file:
+      - ./nebulanews-api/.env
+    environment:
+      - POSTGRES_PASSWORD=nebulapi
+      - POSTGRES_USER=nebulapi
+      - POSTGRES_DB=nebulapi
+
+    ports:
+      - '8000:8000'
+
+    volumes:
+      - ./nebulanews-api/src:/app/src
+
+    depends_on:
+      - nebula-db
